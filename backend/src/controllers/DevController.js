@@ -3,6 +3,24 @@ const Dev = require('../models/Dev');
 
 module.exports = {
 
+  async index(req, res){
+    // capture the user logged
+    const {user} = req.headers;
+
+    const loggedDev = await Dev.findById();
+
+    // Consulta onde retorna os usuário que não foram dado like e deslikes
+    const users = await Dev.find({
+      $and: [
+        {_id: {$ne: user}},
+        {_id: {$nin: loggedDev.likes}},
+        {_id: {$nin: loggedDev.dislikes}},
+      ],
+    });
+
+    return res.json(users);
+  },
+
   /**
    * Create a new user
    * @param req
@@ -14,13 +32,13 @@ module.exports = {
 
     /** verify if user exists */
     const userExists = await Dev.findOne({user: username});
-    if(userExists){
+    if(userExists) {
       return res.json(userExists);
     }
     /** */
     const response = await axios.get(`https://api.github.com/users/${ username }`);
     /** */
-    const {name, bio, avatar_url:avatar} = response.data;
+    const {name, bio, avatar_url: avatar} = response.data;
 
     /** create user into database */
     const devData = await Dev.create({
@@ -32,4 +50,5 @@ module.exports = {
 
     return res.json(devData);
   }
+
 };
