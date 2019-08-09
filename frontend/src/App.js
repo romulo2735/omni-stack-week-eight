@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
 
-class App extends Comment {
-  render(){
-    return (
-        <p> TinDev </p>
-    );
-  }
-}
+import Login from './pages/Login'
 
-export default App;
+export default function App() {
+  return (
+    <div>
+      <Login/>
+    </div>
+  );
+}
