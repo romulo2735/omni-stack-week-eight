@@ -1,4 +1,4 @@
-const {Schema, Model} = require('mongoose');
+const {Schema, model} = require('mongoose');
 
 const DevSchema = new Schema({
   name: {
@@ -12,7 +12,7 @@ const DevSchema = new Schema({
   bio: String,
   avatar: {
     type: String,
-    required
+    required: true,
   },
   likes: [{
     type: Schema.Types.ObjectID,
