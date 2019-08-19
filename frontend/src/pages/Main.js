@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import io from 'socket.io-client';
 import { Link } from 'react-router-dom';
 import './Main.css';
 
@@ -11,6 +12,9 @@ import dislike from './../assets/dislike.svg';
 export default function Main({ match }) {
   const [users, setUsers] = useState([]);
 
+  /**
+   * Chamada API para carregar os usuários
+   */
   useEffect(() => {
     async function loadUsers() {
       const response = await api.get('/devs', {
@@ -22,6 +26,11 @@ export default function Main({ match }) {
     }
     loadUsers();
   }, [match.params._id])
+
+  useEffect(() => {
+    const socket = io('http://localhost:3333');
+    
+  },  [match.params._id])
 
   async function handleLike(id) {
     await api.post(`/dev/${id}/likes`, null, {
