@@ -25,7 +25,7 @@ export default function Main({ navigation }) {
 	}, [id])
 
 	async function handleLike(id) {
-		const [user,  ...rest] = users;
+		const [user, ...rest] = users;
 
 		await api.post(`/dev/${user._id}/likes`, null, {
 			headers: {
@@ -37,7 +37,7 @@ export default function Main({ navigation }) {
 	}
 
 	async function handleDislike(id) {
-		const [user,  ...rest] = users;
+		const [user, ...rest] = users;
 
 		await api.post(`/dev/${user._id}/dislikes`, null, {
 			headers: {
@@ -81,15 +81,20 @@ export default function Main({ navigation }) {
 				}
 			</View>
 
-			<View styles={styles.containerButton}>
-				<TouchableOpacity style={button} onPress={handleDislike}>
-					<Image source={dislike} />
-				</TouchableOpacity>
+			{
+				users.length > 0 && (
+					<View styles={styles.containerButton}>
+						<TouchableOpacity style={button} onPress={handleDislike}>
+							<Image source={dislike} />
+						</TouchableOpacity>
 
-				<TouchableOpacity style={button} onPress={handleLike}>
-					<Image source={like} />
-				</TouchableOpacity>
-			</View>
+						<TouchableOpacity style={button} onPress={handleLike}>
+							<Image source={like} />
+						</TouchableOpacity>
+					</View>
+				)
+			}
+			
 		</SafeAreaView>
 	);
 }
