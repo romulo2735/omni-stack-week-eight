@@ -41,7 +41,7 @@ export default function Main({ navigation }) {
   async function handleLike(id) {
     const [user, ...rest] = users;
 
-    await api.post(`/dev/${user._id}/likes`, null, {
+    await api.post(`/devs/${user._id}/likes`, null, {
       headers: {
         user: id
       }
@@ -53,7 +53,7 @@ export default function Main({ navigation }) {
   async function handleDislike(id) {
     const [user, ...rest] = users;
 
-    await api.post(`/dev/${user._id}/dislikes`, null, {
+    await api.post(`/devs/${user._id}/dislikes`, null, {
       headers: {
         user: id
       }
