@@ -41,7 +41,7 @@ export default function Main({ match }) {
   }, [match.params.id]);
 
   async function handleLike(id) {
-    await api.post(`/dev/${id}/likes`, null, {
+    await api.post(`/devs/${id}/likes`, null, {
       headers: {
         user: match.params.id
       }
