@@ -51,7 +51,7 @@ export default function Main({ match }) {
   }
 
   async function handleDislike(id) {
-    await api.post(`/dev/${id}/dislikes`, null, {
+    await api.post(`/devs/${id}/dislikes`, null, {
       headers: {
         user: match.params.id
       }
